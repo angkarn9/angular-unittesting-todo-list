@@ -1,4 +1,4 @@
-# TodoList102
+# angular-unittesting-todo-list
 ng g c todo-mange
 ng g s todo-list
 
