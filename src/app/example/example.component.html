@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <img src="assets/images/dog.jpg" height="200px"/>
+    <h1>To do list</h1>
+    <div class="form-group">
+      <label for="inputTopic">Topic</label>
+      <input type="text" class="form-control" id="inputTopic" placeholder="Topic">
+      <div class="invalid-feedback">Please input Topic.</div>
+    </div>
+    <div class="form-group">
+      <label for="inputDescription">Description</label>
+      <input type="text" class="form-control" id="inputDescription" placeholder="Description">
+      <div class="invalid-feedback">Please input Description.</div>
+    </div>
+
+    <div class="form-group text-center todo-list-btn-group">
+      <button type="button" class="btn btn-primary" id="btnAdd">Add</button>
+      <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Topic</th>
+            <th>Description</th>
+            <th class="button-action"></th>
+            <th class="button-action"></th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr>
+            <th scope="row">1</th>
+            <td>Topic1</td>
+            <td>Desc1</td>
+            <td class="button-action"><button type="button" class="btn btn-info" id="btnEdit">Edit</button></td>
+            <td class="button-action"><button type="button" class="btn btn-danger" id="btnRemove">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
