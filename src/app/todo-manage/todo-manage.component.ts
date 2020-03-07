@@ -33,4 +33,11 @@ export class TodoManageComponent implements OnInit {
       this.todoListForm.reset();
     });
   }
+
+  edit(index: number) {
+    const itemSelected = this.todoList[index];
+
+    this.todoListForm.get('topic').setValue(itemSelected.topic);
+    this.todoListForm.get('description').setValue(itemSelected.description);
+  }
 }

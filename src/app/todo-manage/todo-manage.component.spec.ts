@@ -4,8 +4,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoManageComponent } from './todo-manage.component';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-fdescribe('TodoManageComponent', () => {
+describe('TodoManageComponent', () => {
   let component: TodoManageComponent;
   let fixture: ComponentFixture<TodoManageComponent>;
   let service: TodoListService;
@@ -14,7 +15,8 @@ fdescribe('TodoManageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ TodoManageComponent ],
       imports: [ HttpClientTestingModule ],
-      providers: [ TodoListService ]
+      providers: [ TodoListService ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
 
@@ -69,6 +71,21 @@ fdescribe('TodoManageComponent', () => {
 
       expect(component.todoListForm.get('topic').value).toBeNull();
       expect(component.todoListForm.get('description').value).toBeNull();
+    });
+  });
+
+  describe('edit', () => {
+    it('should default value from row selected to todoListForm', () => {
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+      component.todoListForm.get('topic').setValue('');
+      component.todoListForm.get('description').setValue('');
+
+      component.edit(0);
+
+      expect(component.todoListForm.get('topic').value).toEqual('topic1');
+      expect(component.todoListForm.get('description').value).toEqual('desc2');
     });
   });
 });
