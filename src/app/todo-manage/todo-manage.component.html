@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h1>Todo List</h1>
+    <form [formGroup]="todoListForm">
+      <div class="form-group">
+        <label for="inputTopic">Topic</label>
+        <input type="text" class="form-control" id="inputTopic" placeholder="Topic" formControlName="topic">
+        <div class="invalid-feedback">Please input Topic.</div>
+      </div>
+      <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <input type="text" class="form-control" id="inputDescription" placeholder="Description" formControlName="description">
+        <div class="invalid-feedback">Please input Description.</div>
+      </div>
+    </form>
+    <div class="form-group text-center todo-list-btn-group">
+      <button type="button" class="btn btn-primary" id="btnAdd" (click)="add()">Add</button>
+      <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Topic</th>
+            <th>Description</th>
+            <th class="button-action"></th>
+            <th class="button-action"></th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let item of todoList; let i = index;">
+            <th scope="row">{{ i+1 }}</th>
+            <td>{{ item.topic }}</td>
+            <td>{{ item.description }}</td>
+            <td class="button-action"><button type="button" class="btn btn-info" id="btnEdit">Edit</button></td>
+            <td class="button-action"><button type="button" class="btn btn-danger" id="btnRemove">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
