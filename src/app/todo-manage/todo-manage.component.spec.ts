@@ -3,7 +3,7 @@ import { TodoListService } from './../services/todo-list.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoManageComponent } from './todo-manage.component';
-import { of } from 'rxjs';
+import { of, Observable, throwError } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TodoManageComponent', () => {
@@ -86,6 +86,86 @@ describe('TodoManageComponent', () => {
 
       expect(component.todoListForm.get('topic').value).toEqual('topic1');
       expect(component.todoListForm.get('description').value).toEqual('desc2');
+    });
+
+    it('should show edit button when click edit button', () => {
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+      component.disableAddButton = false;
+
+      component.edit(0);
+
+      expect(component.disableAddButton).toBe(true);
+    });
+
+    it('should set selectItem for update when click edit button', () => {
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+
+      component.edit(0);
+
+      expect(component.selectItem).toEqual(0);
+    });
+  });
+
+  describe('Update', () => {
+
+    it('should call service.update with new item when click button update', () => {
+      spyOn(service, 'update').and.returnValue(of());
+      component.todoListForm.get('topic').setValue('topicUpdated');
+      component.todoListForm.get('description').setValue('descUpdated');
+      component.selectItem = 0;
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+      component.update();
+
+      expect(service.update).toHaveBeenCalledWith(1, {topic: 'topicUpdated', description: 'descUpdated'});
+    });
+
+    it('should update value to todoList when update success', () => {
+      spyOn(service, 'update').and.returnValue(of(
+        {id: 1, topic: 'topicUpdated', description: 'descUpdated'}
+      ));
+      component.todoListForm.get('topic').setValue('topicUpdated');
+      component.todoListForm.get('description').setValue('descUpdated');
+      component.selectItem = 0;
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+
+      component.update();
+
+      expect(component.todoList).toEqual([
+        {id: 1, topic: 'topicUpdated', description: 'descUpdated'}
+      ]);
+    });
+  });
+
+  describe('Get todoList', () => {
+
+    it('should call service.getList when load page', () => {
+      spyOn(service, 'getList').and.returnValue(of([]));
+
+      component.ngOnInit();
+
+      expect(service.getList).toHaveBeenCalledTimes(1);
+    });
+
+    it('should add item to todoList when call service.getList success', () => {
+      spyOn(service, 'getList').and.returnValue(of([
+        {id: 1, topic: 'topic1', description: 'decs1'},
+        {id: 2, topic: 'topic2', description: 'decs2'}
+      ]));
+
+      component.ngOnInit();
+
+      expect(component.todoList).toEqual([
+        {id: 1, topic: 'topic1', description: 'decs1'},
+        {id: 2, topic: 'topic2', description: 'decs2'}
+      ]);
     });
   });
 });

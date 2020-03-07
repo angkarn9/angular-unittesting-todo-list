@@ -13,7 +13,8 @@
       </div>
     </form>
     <div class="form-group text-center todo-list-btn-group">
-      <button type="button" class="btn btn-primary" id="btnAdd" (click)="add()">Add</button>
+      <button type="button" class="btn btn-primary" id="btnAdd" *ngIf="!disableAddButton" (click)="add()">Add</button>
+      <button type="button" class="btn btn-primary" id="btnUpdate" *ngIf="disableAddButton" (click)="update()">Update</button>
       <button type="button" class="btn btn-secondary" id="btnClear">Clear</button>
     </div>
     <div class="table-responsive">
