@@ -11,3 +11,7 @@ export interface ITodoListResponse {
     topic: string;
     description: string;
 }
+
+export interface IDeleteResponse {
+    success: boolean;
+}
