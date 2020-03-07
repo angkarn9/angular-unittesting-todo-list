@@ -168,4 +168,33 @@ describe('TodoManageComponent', () => {
       ]);
     });
   });
+
+  describe('Delete', () => {
+
+    it('should call service.delete when click delete button', () => {
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc2'}
+      ];
+
+      spyOn(service, 'delete').and.returnValue(of());
+
+      component.delete(0);
+
+      expect(service.delete).toHaveBeenCalledWith(1);
+    });
+
+    it('should remove item from todoList when delete success', () => {
+      component.todoList = [
+        {id: 1, topic: 'topic1', description: 'desc1'},
+        {id: 2, topic: 'topic2', description: 'desc2'}
+      ];
+      spyOn(service, 'delete').and.returnValue(of({success: true}));
+
+      component.delete(1);
+
+      expect(component.todoList).toEqual([
+        {id: 1, topic: 'topic1', description: 'desc1'}
+      ]);
+    });
+  });
 });

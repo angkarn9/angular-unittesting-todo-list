@@ -34,7 +34,7 @@
             <td>{{ item.topic }}</td>
             <td>{{ item.description }}</td>
             <td class="button-action"><button type="button" class="btn btn-info" id="btnEdit" (click)="edit(i)">Edit</button></td>
-            <td class="button-action"><button type="button" class="btn btn-danger" id="btnRemove">Delete</button></td>
+            <td class="button-action"><button type="button" class="btn btn-danger" id="btnRemove" (click)="delete(i)">Delete</button></td>
           </tr>
         </tbody>
       </table>

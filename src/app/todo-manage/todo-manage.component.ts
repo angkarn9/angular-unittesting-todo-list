@@ -59,4 +59,10 @@ export class TodoManageComponent implements OnInit {
       this.todoList[this.selectItem].description = response.description;
     });
   }
+
+  delete(index: number) {
+    this.service.delete(this.todoList[index].id).subscribe(() => {
+      this.todoList.splice(index, 1);
+    });
+  }
 }
